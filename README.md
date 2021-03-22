@@ -10,3 +10,7 @@ Send email to user when the conversion rate go below the set threshold for their
 To run test run `php artisan test`
 
 Get to access token from **[Fixer](http://fixer.io/)**
+
+To get test data run migration and seeder
+
+`php artisan migrate:fresh --seed`
