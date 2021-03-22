@@ -1,5 +1,8 @@
 <?php
 
+use App\Events\UserCurrencyThresholdExceededEvent;
+use App\Mail\UserCurrencyThresholdMail;
+use App\Models\UserCurrencyThreshold;
 use Illuminate\Support\Facades\Route;
 
 /*

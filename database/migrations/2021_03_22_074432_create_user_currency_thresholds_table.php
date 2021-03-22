@@ -19,6 +19,8 @@ class CreateUserCurrencyThresholdsTable extends Migration
             $table->char('currency', '3');
             $table->string('threshold', 50);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

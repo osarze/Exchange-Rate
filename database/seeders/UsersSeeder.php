@@ -19,6 +19,8 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('aaaaaa')
         ]);
 
+        User::factory(20)->create();
+
         $this->command->info('Users table seeded successfully');
     }
 }

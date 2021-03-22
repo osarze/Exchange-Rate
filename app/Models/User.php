@@ -42,6 +42,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function currencyThreshold(){
+        return $this->hasMany(UserCurrencyThreshold::class, 'user_id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
