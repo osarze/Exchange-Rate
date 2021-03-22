@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCurrencyThresholdRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\UserCurrencyThreshold;
 
 class UserController extends Controller
 {
@@ -21,6 +23,20 @@ class UserController extends Controller
 
         return [
             'message' => 'Base currency updated successfully',
+        ];
+    }
+
+    public function setBaseCurrencyThreshold(UserCurrencyThresholdRequest $request){
+        UserCurrencyThreshold::updateOrCreate([
+            'user_id' => auth()->user()->id,
+            'currency' => $request->currency
+        ],
+        [
+            'threshold' => $request->threshold
+        ]);
+
+        return [
+            'message' => 'Threshold set successfully'
         ];
     }
 }

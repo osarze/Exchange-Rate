@@ -30,6 +30,7 @@ Route::group([
 
 Route::middleware(['auth:api'])->group(function(){
     Route::patch('user/base_currency', [UserController::class, 'setBaseCurrency']);
+    Route::post('user/currency_treshold', [UserController::class, 'setBaseCurrencyThreshold']);
 
     Route::get('currencies/exchange-rates', [CurrencyController::class, 'getCurrencyExchangeRate']);
 

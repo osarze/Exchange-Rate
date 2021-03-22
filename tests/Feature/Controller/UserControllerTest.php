@@ -54,4 +54,34 @@ class UserControllerTest extends TestCase
         ]);
     }
 
+    public function test_set_curency_rate_below_threshold_is_validated(){
+        $this->withoutExceptionHandling();
+
+        $this->expectException('Illuminate\Validation\ValidationException');
+
+        $this->actingAs($this->user)
+        ->postJson('/api/user/currency_treshold', [
+            'curency' =>  '',
+            'treshold' =>''
+        ]);
+    }
+
+    public function test_set_curency_rate_below_threshold(){
+        $thresholdValue = mt_rand(1, 1000);
+        $response = $this->actingAs($this->user)
+        ->postJson('/api/user/currency_treshold', [
+            'currency' =>  $this->selectedCurrency,
+            'threshold' => $thresholdValue
+        ])
+        ->assertStatus(200)
+        ->assertJson([
+            'message' => 'Threshold set successfully'
+        ]);
+
+        $this->assertDatabaseHas('user_currency_thresholds', [
+            'user_id' => $this->user->id,
+            'currency' => $this->selectedCurrency,
+            'threshold' => $thresholdValue,
+        ]);
+    }
 }
